@@ -85,12 +85,12 @@ check_is_live <- function(){
 }
 
 # so cool!
-chunk_extract <- function(.contents, chunk_name) {
+text_chunk_extract <- function(.text, chunk_name) {
 
   # Find the start of the desired chunk
   chunk_regex <- paste0('\\`\\`\\`\\{[A-z]+ ', chunk_name, '(\\}|(,.*\\}))$')
 
-  start_chunk <- .contents %>%
+  start_chunk <- .text %>%
     str_which(chunk_regex)
 
   if (length(start_chunk) == 0) {
@@ -103,11 +103,11 @@ chunk_extract <- function(.contents, chunk_name) {
 
   }
 
-  end_chunk <- .contents[-c(1:start_chunk)] %>%
+  end_chunk <- .text[-c(1:start_chunk)] %>%
     str_which(fixed("```")) %>%
     min() + start_chunk
 
-  chunk_text <- .contents[(start_chunk):(end_chunk)] %>%
+  chunk_text <- .text[(start_chunk):(end_chunk)] %>%
     str_c(collapse = "\n")
 
   attributes(chunk_text) <- NULL
@@ -137,7 +137,7 @@ return_chunk_code_live <- function(chunk_name) {
     ed             <- rstudioapi::getSourceEditorContext()
     source         <- ed$contents
     
-    my_code_chunk  <- chunk_extract(source, chunk_name)
+    my_code_chunk  <- text_chunk_extract(.text = source, chunk_name)
 
     # If neither of those worked, error
     if (is.null(my_code_chunk)) {
