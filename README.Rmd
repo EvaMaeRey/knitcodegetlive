@@ -10,6 +10,7 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
+options(tidyverse.quiet = TRUE)
 ```
 
 
@@ -26,24 +27,32 @@ I'm excited to use it in flipbookr (my live would have been so much better!) and
 # hesitations
 
 1. where'd be good for code to live? 
+2. if a package, a better name?
 2. How is the live bit tested in a systematic way.
 3. other pitfalls?
 
 
-```{r}
-sample_code <- 
-'library(tidyverse)
-iris %>%
-  group_by(Species) %>%
-  summarize(mean(Sepal.Length))'
-```
 
-```{r sample_chunk}
+
+
+
+
+#### contents of a chunk called 'sample_chunk':
+
+```{r sample_chunk, eval = F}
 library(tidyverse)
 iris %>%
   group_by(Species) %>%
   summarize(mean(Sepal.Length))
 ```
+
+
+
+
+
+# flair code for grabbing chunk code live rework!
+
+I the rework, I'm just trying to understand what's going on so braking things up more, and make the code potentially usable in other contexts.  
 
 ```{r flairliverework}
 # Awesome!

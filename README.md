@@ -22,46 +22,23 @@ better\!) and readme2pkg.
 # hesitations
 
 1.  where’d be good for code to live?
-2.  How is the live bit tested in a systematic way.
-3.  other pitfalls?
+2.  if a package, a better name?
+3.  How is the live bit tested in a systematic way.
+4.  other pitfalls?
 
-<!-- end list -->
-
-``` r
-sample_code <- 
-'library(tidyverse)
-iris %>%
-  group_by(Species) %>%
-  summarize(mean(Sepal.Length))'
-```
+#### contents of a chunk called ‘sample\_chunk’:
 
 ``` r
 library(tidyverse)
-```
-
-    #> ── Attaching core tidyverse packages ─────────────────── tidyverse 2.0.0.9000 ──
-    #> ✔ dplyr     1.1.0     ✔ readr     2.1.4
-    #> ✔ forcats   1.0.0     ✔ stringr   1.5.0
-    #> ✔ ggplot2   3.4.4     ✔ tibble    3.2.1
-    #> ✔ lubridate 1.9.2     ✔ tidyr     1.3.0
-    #> ✔ purrr     1.0.1     
-    #> ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-    #> ✖ dplyr::filter() masks stats::filter()
-    #> ✖ dplyr::lag()    masks stats::lag()
-    #> ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
-
-``` r
 iris %>%
   group_by(Species) %>%
   summarize(mean(Sepal.Length))
 ```
 
-    #> # A tibble: 3 × 2
-    #>   Species    `mean(Sepal.Length)`
-    #>   <fct>                     <dbl>
-    #> 1 setosa                     5.01
-    #> 2 versicolor                 5.94
-    #> 3 virginica                  6.59
+# flair code for grabbing chunk code live rework\!
+
+I the rework, I’m just trying to understand what’s going on so braking
+things up more, and make the code potentially usable in other contexts.
 
 ```` r
 # Awesome!
