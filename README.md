@@ -118,7 +118,7 @@ chunk_extract <- function(.contents, chunk_name) {
 
 chunk_remove_fencing_and_options <- function(code_chunk){
   
-  # does not yet remove options like these: 
+  # does not yet, in fact, remove options like these: 
   # | my-chunk, echo = FALSE, fig.width = 10,
   # | fig.cap = "This is a long long
   # |   long long caption."
@@ -130,8 +130,10 @@ chunk_remove_fencing_and_options <- function(code_chunk){
   
 }
 
+# wow!
 return_chunk_code_live <- function(chunk_name) {
 
+  
     ed             <- rstudioapi::getSourceEditorContext()
     source         <- ed$contents
     
