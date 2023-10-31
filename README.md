@@ -1,6 +1,32 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+# {knitrcodegetlive}
+
+knitr::knit\_code$get has been used in projects like flair and
+flipbookr… (where else?).
+
+In the {flair} package, you can also reference code chunks in your
+interactive session (RStudio). This is really cool\! It is powerful for
+users to quickly inspect what will happen upon compiling - without
+compiling\! This may allow for *much* faster iteration. Also, users in
+general expect their interactive session to mirror what happens in their
+rendered doc. Meeting that expectation is good.
+
+Here, using the flair strategies and code (I was blown away\!), we
+propose ‘return\_chunk\_code’ for general use\!
+
+I’m excited to use it in flipbookr (my live would have been so much
+better\!) and readme2pkg.
+
+# hesitations
+
+1.  where’d be good for code to live?
+2.  How is the live bit tested in a systematic way.
+3.  other pitfalls?
+
+<!-- end list -->
+
 ``` r
 sample_code <- 
 'library(tidyverse)
@@ -38,12 +64,14 @@ iris %>%
     #> 3 virginica                  6.59
 
 ```` r
+# Awesome!
 check_is_live <- function(){
   
-    is_live <- FALSE
+  is_live <- FALSE
   
   # Check to see if we're in editor context
-  if (requireNamespace("rstudioapi", quietly = TRUE) && rstudioapi::isAvailable()) {
+  if (requireNamespace("rstudioapi", quietly = TRUE) &&
+      rstudioapi::isAvailable()) {
 
     is_live <- tryCatch({
       rstudioapi::getSourceEditorContext()
@@ -56,6 +84,7 @@ check_is_live <- function(){
   
 }
 
+# so cool!
 chunk_extract <- function(.contents, chunk_name) {
 
   # Find the start of the desired chunk
@@ -96,11 +125,10 @@ chunk_remove_fencing_and_options <- function(code_chunk){
   
  chunk_as_vec <- str_split(code_chunk,"\\n")[[1]] 
  
- # remove fencing, first and last lines
+ # remove fencing which are first and last lines
  return(chunk_as_vec[2:(length(chunk_as_vec)-1)])
   
 }
-
 
 return_chunk_code_live <- function(chunk_name) {
 
@@ -123,6 +151,14 @@ return_chunk_code_live <- function(chunk_name) {
   
 }
 
+#' Title
+#'
+#' @param chunk_name a character string with the name of the chunk of interest
+#'
+#' @return a vector of the code contained in the referenced chunk
+#' @export 
+#'
+#' @examples
 return_chunk_code <- function(chunk_name){
   
   is_live <- check_is_live()
@@ -143,3 +179,27 @@ return_chunk_code("sample_chunk")
 
     #> [1] "library(tidyverse)"              "iris %>%"                       
     #> [3] "  group_by(Species) %>%"         "  summarize(mean(Sepal.Length))"
+
+-----
+
+# Package up?
+
+``` r
+devtools::create(".")
+usethis::use_lifecycle_badge("experimental")
+usethis::use_pipe()
+```
+
+``` r
+# I'd love to run this live... but would need to incorporate live option
+# readme2pkg is actually a big motivator for digging in to flair strategy
+readme2pkg::chunk_to_r("flairliverework")
+```
+
+<https://github.com/EvaMaeRey/readme2pkg>
+
+### obviously lots to do if committing to this.
+
+``` r
+devtools::check()
+```
