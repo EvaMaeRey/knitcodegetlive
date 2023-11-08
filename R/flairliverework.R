@@ -68,8 +68,14 @@ chunk_remove_fencing_and_options <- function(code_chunk){
 return_chunk_code_live <- function(chunk_name) {
 
   
-    ed             <- rstudioapi::getSourceEditorContext()
-    source         <- ed$contents
+    ed        <- rstudioapi::getSourceEditorContext()
+    source    <- ed$contents
+
+    # can we use knitr tools to directly parse source for us? 
+    # tmp       <- tempfile()
+    # writeLines(source, tmp)
+    # readLines(tmp)
+    # knitr::knit_code$get(name = tmp)
     
     my_code_chunk  <- text_chunk_extract(.text = source, chunk_name)
 
@@ -106,3 +112,5 @@ return_chunk_code <- function(chunk_name){
     }
 
 }
+
+

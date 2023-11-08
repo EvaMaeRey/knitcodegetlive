@@ -16,7 +16,7 @@ rendered doc. Meeting that expectation is good.
 Here, using the flair strategies and code (I was blown away\!), we
 propose ‘return\_chunk\_code’ for general use\!
 
-I’m excited to use it in flipbookr (my live would have been so much
+I’m excited to use it in flipbookr (my life would have been so much
 better\!) and readme2pkg.
 
 # hesitations
@@ -111,8 +111,14 @@ chunk_remove_fencing_and_options <- function(code_chunk){
 return_chunk_code_live <- function(chunk_name) {
 
   
-    ed             <- rstudioapi::getSourceEditorContext()
-    source         <- ed$contents
+    ed        <- rstudioapi::getSourceEditorContext()
+    source    <- ed$contents
+
+    # can we use knitr tools to directly parse source for us? 
+    # tmp       <- tempfile()
+    # writeLines(source, tmp)
+    # readLines(tmp)
+    # knitr::knit_code$get(name = tmp)
     
     my_code_chunk  <- text_chunk_extract(.text = source, chunk_name)
 

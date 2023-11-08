@@ -169,6 +169,8 @@ return_chunk_code <- function(chunk_name){
     }
 
 }
+
+
 ```
 
 ```{r}
@@ -201,18 +203,3 @@ https://github.com/EvaMaeRey/readme2pkg
 devtools::check()
 ```
 
-
-
----
-
-
-# flipbookr experiment  https://github.com/EvaMaeRey/flipbookr/blob/master/R/h_write_instant_flipbook.R
-
-https://rstudio.github.io/rstudioapi/reference/viewer.html
-
-
-```{r}
-
-
-
-```
