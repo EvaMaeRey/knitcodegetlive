@@ -24,8 +24,8 @@ text_chunk_extract <- function(.text, chunk_name) {
   # Find the start of the desired chunk
   chunk_regex <- paste0('\\`\\`\\`\\{[A-z]+ ', chunk_name, '(\\}|(,.*\\}))$')
 
-  start_chunk <- .text %>%
-    str_which(chunk_regex)
+  start_chunk <- .text |>
+    stringr::str_which(chunk_regex)
 
   if (length(start_chunk) == 0) {
 
@@ -37,12 +37,12 @@ text_chunk_extract <- function(.text, chunk_name) {
 
   }
 
-  end_chunk <- .text[-c(1:start_chunk)] %>%
-    str_which(fixed("```")) %>%
+  end_chunk <- .text[-c(1:start_chunk)] |>
+    stringr::str_which(stringr::fixed("```")) |>
     min() + start_chunk
 
-  chunk_text <- .text[(start_chunk):(end_chunk)] %>%
-    str_c(collapse = "\n")
+  chunk_text <- .text[(start_chunk):(end_chunk)] |>
+    stringr::str_c(collapse = "\n")
 
   attributes(chunk_text) <- NULL
 
@@ -57,7 +57,7 @@ chunk_remove_fencing_and_options <- function(code_chunk){
   # | fig.cap = "This is a long long
   # |   long long caption."
   
- chunk_as_vec <- str_split(code_chunk,"\\n")[[1]] 
+ chunk_as_vec <- stringr::str_split(code_chunk,"\\n")[[1]] 
  
  # remove fencing which are first and last lines
  return(chunk_as_vec[2:(length(chunk_as_vec)-1)])
@@ -108,7 +108,7 @@ return_chunk_code <- function(chunk_name){
   if(is_live){
     return_chunk_code_live(chunk_name)
   }else{
-  knitr::knit_code$get(name = chunk_name) %>% as.vector()
+  knitr::knit_code$get(name = chunk_name) |> as.vector()
     }
 
 }

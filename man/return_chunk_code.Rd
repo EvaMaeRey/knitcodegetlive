@@ -7,7 +7,10 @@
 return_chunk_code(chunk_name)
 }
 \arguments{
-\item{chunk_name}{}
+\item{chunk_name}{a character string with the name of the chunk of interest}
+}
+\value{
+a vector of the code contained in the referenced chunk
 }
 \description{
 Title
